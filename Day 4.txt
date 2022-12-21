@@ -1,0 +1,29 @@
+<레지스터를 통한 인자 전달>
+레지스터 콜, 패스트 콜이라고도 부름
+C언어처럼 인자 전달하는 법은 스택에 인자를 넣었다가 꺼내는 방식
+But 레지스터 콜은 레지스터에 인자를 넣어둠 -> 스택 정리 필요 X
+
+가변인자 방식은 함수 밖에서 스택 정리하도록 해야함
+
+<STD 함수 호출 방식으로 인자 전달>
+스택에 인자 전달하는 것은 C언어 방식과 유사
+
+C언어 방식은 인자를 몇 개 전달할지 모르기 때문에 함수 밖에서 정리
+STD 방식은 가변인자를 사용하지 않기로 정해둠
+-> 따라서 함수 내부에서 처리해줌
+
+<pushad, popad, pushfd, popfd, lahf, sahf>
+스택에 범용 레지스터 저장 및 불러오기
+
+pushad : ad는 all general-purpose registers dword의 약자
+eax, ecx, edx, ebx, ebp, esi, edi
+
+popad는 반대로 edi부터 eax까지 꺼내온다
+
+pushad, popad를 통해서 값이 망가져도 복원이 가능
+
+상태 플래그의 상태는 fd를 이용
+pushfd / popfd -> 4바이트로 모두 처리가 된다
+
+lahf는 상태 레지스터를 읽어서 ah 레지스터로 이동
+sahf는 store로 읽어 오는 것
